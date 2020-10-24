@@ -64,6 +64,8 @@ jQuery(document).ready(function($) {
 		episodeIframe.attr('src', item.link.replace('/episodes/', '/embed/episodes/'));
 		const episodeAuthor = clone.find('.episodeAuthor');
 		episodeAuthor.text(item.author);
+		const episodeDescription = clone.find('.episodeDescription');
+		episodeDescription.html(item.description.substring(0, 100)+'...');
 		const episodeDate = clone.find('.episodeDate');
 		episodeDate.text(item.pubDate.split(' ')[0]);
 		const episodeImage = clone.find('.episodeImage');
