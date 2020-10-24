@@ -28,7 +28,19 @@ jQuery(document).ready(function($) {
 	setupPageWithRss(feedUrl);
 
 	var fillEpisodes = function(items) {
-		console.log(items);
+		if(!items || items.length == 0)
+			return;
+		// Fill last episode
+		const lastEpisode = items[0];
+		console.log(lastEpisode);
+		$('#lastEpisodeHeader').text(lastEpisode.title);
+		$('#lastEpisodeAuthor').text(lastEpisode.author);
+		// Set url
+		$('#lastEpisodeLink').attr('href', lastEpisode.link)
+		$('#lastEpisodeIframe').attr('src', lastEpisode.link.replace('/episodes/', '/embed/episodes/'));
+		// Get the date only (not so good way)
+		const episodeDate = lastEpisode.pubDate.split(' ')[0];
+		$('#lastEpisodeDate').text(episodeDate);
 	};
 	
 	var siteMenuClone = function() {
