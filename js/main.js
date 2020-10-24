@@ -9,13 +9,17 @@ jQuery(document).ready(function($) {
 	"use strict";
 	
 	const feedUrl = 'https://anchor.fm/s/1d3bd2fc/podcast/rss';
+	const apiKey = '';
+	const feedCount = 10;
 
 	/**
 	 * Download the rss feed and setup page using data
 	 * @param {string} feedUrl 
+	 * @param {string} apiKey
+	 * @param {number} count
 	 */
-	var setupPageWithRss = function(feedUrl) {
-		fetch('https://api.rss2json.com/v1/api.json?rss_url='+feedUrl)
+	var setupPageWithRss = function(feedUrl, apiKey, count) {
+		fetch('https://api.rss2json.com/v1/api.json?rss_url='+feedUrl+'&api_key='+apiKey+'&count='+count)
 		.then(data => data.json())
 		.then(response => {
 			console.log(response);
@@ -25,7 +29,7 @@ jQuery(document).ready(function($) {
 				console.error("Cannot download rss feed");
 		});
 	};
-	setupPageWithRss(feedUrl);
+	setupPageWithRss(feedUrl, apiKey, feedCount);
 
 	var fillEpisodes = function(items) {
 		if(!items || items.length == 0)
@@ -41,6 +45,26 @@ jQuery(document).ready(function($) {
 		// Get the date only (not so good way)
 		const episodeDate = lastEpisode.pubDate.split(' ')[0];
 		$('#lastEpisodeDate').text(episodeDate);
+		const firstContainer = $('.episodeContainer');
+		const parent = firstContainer.parent();
+
+		items.forEach(item => {
+			console.log(item);
+			const clone = firstContainer.clone();
+			const episodeLink = clone.find('.episodeLink');
+			episodeLink.text(item.title);
+			episodeLink.attr('href', item.link);
+			const episodeIframe = clone.find('.episodeIframe');
+			episodeIframe.attr('src', item.link.replace('/episodes/', '/embed/episodes/'));
+			const episodeAuthor = clone.find('.episodeAuthor');
+			episodeAuthor.text(item.author);
+			const episodeDate = clone.find('.episodeDate');
+			episodeDate.text(item.pubDate.split(' ')[0]);
+			const episodeImage = clone.find('.episodeImage');
+			episodeImage.attr('style', 'background-image: url('+item.thumbnail+')');
+			clone.appendTo(parent);
+		});
+		firstContainer.remove();
 	};
 	
 	var siteMenuClone = function() {
