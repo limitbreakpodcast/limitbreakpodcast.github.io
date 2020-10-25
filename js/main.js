@@ -25,6 +25,7 @@ jQuery(document).ready(function($) {
 			console.log(response);
 			if(response.status == 'ok') {
 				fillEpisodesList(response.items);
+				showPage(0);
 			} else {
 				console.error("Cannot download rss feed");
 			}
@@ -56,7 +57,6 @@ jQuery(document).ready(function($) {
 	};
 
 	var fillEpisode = function(item, firstContainer, parent) {
-		console.log(item);
 		const clone = firstContainer.clone();
 		const episodeLink = clone.find('.episodeLink');
 		episodeLink.text(item.title);
@@ -72,6 +72,20 @@ jQuery(document).ready(function($) {
 		const episodeImage = clone.find('.episodeImage');
 		episodeImage.attr('style', 'background-image: url('+item.thumbnail+')');
 		clone.appendTo(parent);
+	};
+
+	var showPage = function(index) {
+		const countPerPage = 5;
+		const limitMin = countPerPage * index;
+		const limitMax = limitMin + countPerPage;
+		$('.episodeContainer').each((index, container) => {
+			if(index >= limitMin && index < limitMax){
+				$(container).show();
+			}else{
+				// Hide does not work due to style with important
+				$(container).attr('style','display:none !important');
+			}
+		});
 	};
 	
 	var siteMenuClone = function() {
