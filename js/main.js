@@ -4,6 +4,9 @@
 	once: true
 });
 
+let currentPage = 0;
+let pagesCount = 0;
+
 jQuery(document).ready(function($) {
 	
 	"use strict";
@@ -11,6 +14,7 @@ jQuery(document).ready(function($) {
 	const feedUrl = 'https://anchor.fm/s/1d3bd2fc/podcast/rss';
 	const apiKey = '';
 	const feedCount = 10;
+	const pageSize = 5;
 
 	/**
 	 * Download the rss feed and setup page using data
@@ -25,7 +29,7 @@ jQuery(document).ready(function($) {
 			console.log(response);
 			if(response.status == 'ok') {
 				fillEpisodesList(response.items);
-				showPage(0);
+				showPage(currentPage);
 			} else {
 				console.error("Cannot download rss feed");
 			}
@@ -54,6 +58,13 @@ jQuery(document).ready(function($) {
 			fillEpisode(item, firstContainer, parent);
 		});
 		firstContainer.remove();
+
+		const firstPageCounter = $('.pageCounter');
+		pagesCount = items.length / pageSize;
+		for(let i = 0; i < pagesCount; i++) {
+			createPageCursor(firstPageCounter, i);
+		}
+		firstPageCounter.remove();
 	};
 
 	var fillEpisode = function(item, firstContainer, parent) {
@@ -66,7 +77,7 @@ jQuery(document).ready(function($) {
 		const episodeAuthor = clone.find('.episodeAuthor');
 		episodeAuthor.text(item.author);
 		const episodeDescription = clone.find('.episodeDescription');
-		episodeDescription.html(item.description.substring(0, 100)+'...');
+		episodeDescription.html(item.description.substring(0, 80) + '...');
 		const episodeDate = clone.find('.episodeDate');
 		episodeDate.text(item.pubDate.split(' ')[0]);
 		const episodeImage = clone.find('.episodeImage');
@@ -74,10 +85,24 @@ jQuery(document).ready(function($) {
 		clone.appendTo(parent);
 	};
 
+	var createPageCursor = function(firstPageCounter, i) {
+		const counter = firstPageCounter.clone();
+		counter.find('span').text(i + 1);
+		counter.appendTo(firstPageCounter.parent());
+		if(i == 0)
+			$(counter).addClass('active');
+		$(counter).click(function() {
+			$('.pageCounter').removeClass('active');
+			showPage(i);
+			$(this).addClass('active');
+		});
+	};
+
 	var showPage = function(index) {
-		const countPerPage = 5;
+		const countPerPage = pageSize;
 		const limitMin = countPerPage * index;
 		const limitMax = limitMin + countPerPage;
+		currentPage = index;
 		$('.episodeContainer').each((index, container) => {
 			if(index >= limitMin && index < limitMax){
 				$(container).show();
