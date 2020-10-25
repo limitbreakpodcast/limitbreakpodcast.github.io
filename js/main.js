@@ -23,10 +23,11 @@ jQuery(document).ready(function($) {
 		.then(data => data.json())
 		.then(response => {
 			console.log(response);
-			if(response.status == 'ok')
+			if(response.status == 'ok') {
 				fillEpisodesList(response.items);
-			else
+			} else {
 				console.error("Cannot download rss feed");
+			}
 		});
 	};
 	setupPageWithRss(feedUrl, apiKey, feedCount);
