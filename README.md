@@ -1,6 +1,6 @@
 # **:triangular_flag_on_post: Limit Break Podcast**
 
-![project version](https://img.shields.io/badge/project-0.01.00-brightgreen.svg)
+![project version](https://img.shields.io/badge/project-0.01.01-brightgreen.svg)
 
 > Simple site for podcast Limit Break
 
