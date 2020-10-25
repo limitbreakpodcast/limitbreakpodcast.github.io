@@ -960,3 +960,7 @@ a {
 a {
   color: #122E3C;
 }
+
+li.pageCounter {
+  cursor: pointer;
+}

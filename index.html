@@ -95,13 +95,13 @@
         <div class="row align-items-center justify-content-center text-center">
 
           <div class="col-md-8" data-aos="fade-up" data-aos-delay="400">
-            <h2 class="text-white font-weight-light mb-2 display-4">Episodio 1: Il primo Jrpg non si scorda mai</h2>
-            <div class="text-white mb-4"><span class="text-white-opacity-05"><small>By Limit Break Podcast | 23 Aprile 2020</small></span></div>
-            <p><a href="https://anchor.fm/limit-break-podcast/episodes/Il-primo-Jrpg-non-si-scorda-mai-ed4hda" class="btn btn-primary btn-sm py-3 px-4 small" target="_blank">Vai al dettaglio</a></p>
+            <h2 id="lastEpisodeHeader" class="text-white font-weight-light mb-2 display-4"></h2>
+            <div class="text-white mb-4"><span class="text-white-opacity-05"><small>By <span id="lastEpisodeAuthor"></span> | <span id="lastEpisodeDate"></span></small></span></div>
+            <p><a id="lastEpisodeLink" href="#" class="btn btn-primary btn-sm py-3 px-4 small" target="_blank">Vai al dettaglio</a></p>
 
             <div class="player">
               <div style="max-width: 100%">
-                <iframe src="https://anchor.fm/limit-break-podcast/embed/episodes/Il-primo-Jrpg-non-si-scorda-mai-ed4hda/a-a20jd9h" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
+                <iframe id="lastEpisodeIframe" src="#" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
               </div>
             </div>
 
@@ -120,17 +120,18 @@
           </div>
         </div>
         
-        <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
-          <div class="image" style="background-image: url('images/img_1.jpg');"></div>
+        <div class="episodeContainer d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
+          <div class="episodeImage image" style="background-image: url('')"></div>
+          <!-- <img class="image" src="images/img_1.jpg"></div> -->
           <div class="text">
 
-            <h3 class="font-weight-light"><a href="single-post.html">Episodio 1: Il primo Jrpg non si scorda mai</a></h3>
-            <div class="text-white mb-3"><span class="text-black-opacity-05"><small>By Limit Break Podcast <span class="sep">/</span> 23 Aprile 2020</small></span></div>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti repellat mollitia consequatur, optio nesciunt placeat. Iste voluptates excepturi tenetur, nesciunt.</p>
+            <h3 class="font-weight-light"><a class="episodeLink" href="#"></a></h3>
+            <div class="text-white mb-3"><span class="text-black-opacity-05"><small>By <span class="episodeAuthor">Limit Break Podcast</span> <span class="sep">/</span> <span class="episodeDate">23 Aprile 2020</span></small></span></div>
+            <p class="episodeDescription mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti repellat mollitia consequatur, optio nesciunt placeat. Iste voluptates excepturi tenetur, nesciunt.</p>
 
             <div class="player">
               <div style="max-width: 100%">
-                <iframe src="https://anchor.fm/limit-break-podcast/embed/episodes/Il-primo-Jrpg-non-si-scorda-mai-ed4hda/a-a20jd9h" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
+                <iframe class="episodeIframe" src="#" height="102px" width="400px" frameborder="0" scrolling="no"></iframe>
               </div>
             </div>
 
@@ -146,13 +147,7 @@
           <div class="col-md-12 text-center">
             <div class="site-block-27">
               <ul>
-                <li><a href="#">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&gt;</a></li>
+                <li class="pageCounter"><span>1</span></li>
               </ul>
             </div>
           </div>
