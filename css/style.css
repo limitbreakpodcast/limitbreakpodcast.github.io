@@ -964,3 +964,8 @@ a {
 li.pageCounter {
   cursor: pointer;
 }
+
+.episodeIframe,
+.lastEpisodeIframe {
+  width: 100%;
+}
